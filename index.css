@@ -1,0 +1,6 @@
+.content > .submit-btn {
+    border: none;
+    padding: 10px 50px;
+    border-radius: 8px;
+    font-size: 18px;
+}
