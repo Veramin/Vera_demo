@@ -6,6 +6,7 @@
 + 指令：cd [指定目录] -> 进入文件夹（你想存放code的地方）
 + 指令：mkdir [文件夹的名字] -> 创建代码文件夹
 + 指令：tsc --init -> 生成tsconfig.json配置文件（具体作用：VSCode自动编译.ts文件第一步)
++ 手动修改tsconfig.json配置文件 -> "outDir": "./js"(具体作用：表明编译后的js文件的输出位置)
 + 手动创建文件夹，例如helloWord.ts，编写ts代码
 + ~~按键：Ctrl+Shift+B -> 先启动build task，生成编译之后的js文件~~
 + ~~按键：Ctrl+Shift+B -> 再启动watch task，实时watch ts代码~~
