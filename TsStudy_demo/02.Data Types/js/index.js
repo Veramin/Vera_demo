@@ -95,3 +95,63 @@ var themeColor3 = color3.yellow;
 console.log(themeColor3); // 8
 var themeColor3 = color3.blue;
 console.log(themeColor3); // 9
+// ***************************************************************************
+// 任意类型(any)
+var num = 312321;
+num = 'string';
+// 任意类型的用法
+// 错误用法一：
+// var ele = document.getElementById('box');
+// ele.style.color = 'red'; // Object is possibly 'null'.
+// 错误用法二：
+// var ele: object = document.getElementById('box');  // Property 'style' does not exist on type 'object'.因为没有object这种数据类型
+// ele.style.color = 'red'; // 类型“object”上不存在属性“style”。
+// 正确用法
+var ele = document.getElementById('box');
+ele.style.color = 'lightblue';
+// ***************************************************************************
+// null and undefined类型   其他(never)数据类型的子类型
+//  var tips: null;
+//  tips = 'bhfbvcbfhd'  // Type '"bhfbvcbfhd"' is not assignable to type 'null'.
+// var _num: number;
+// console.log(_num); // Variable '_num' is used before being assigned.
+var num_;
+console.log(num_); // undefined
+// num_ = 21312; // Type '21312' is not assignable to type 'undefined'.
+// 定义为赋值
+var num1;
+num1 = 2313;
+// 如果是null/undefined/number三者之一，则使用如下写法
+var tip;
+tip = 312313;
+// ***************************************************************************
+// void类型             // 一般用于不会返回任何数据的函数
+// 正确写法
+// 无返回值
+function noValue() {
+    console.log('这个函数无返回值');
+}
+noValue();
+// 有返回值
+function value() {
+    return 666;
+}
+value();
+console.log(value()); ///666
+// 错误写法
+// 无返回值
+// function noValueError(): number { // A function whose declared type is neither 'void' nor 'any' must return a value.
+//     console.log('无返回值：这个是错误的写法');
+// }
+// function noValueError(): void { // A function whose declared type is neither 'void' nor 'any' must return a value.
+//     return 88888;  // Type '88888' is not assignable to type 'void'.
+// }
+// ***************************************************************************
+// never类型             // 是其他的类型的子类型，代表不会出现的值
+// 这意味这声明never的变量只能被never类型所赋值
+var a;
+// a = 666;    // Type '666' is not assignable to type 'undefined'.
+a = undefined;
+var emp;
+// emp = 666;  // Type '666' is not assignable to type 'null'.
+emp = null;
