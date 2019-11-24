@@ -2,10 +2,12 @@
 import React, { Component } from 'react'
 
 class Welcome extends Component {
-    render() {
-        return <h1>Welcome to the react's world.</h1>
-    }
+  render () {
+    return <div class='box'>
+             <h1>Welcome to the react's world.</h1>
+           </div>
+  }
 }
 
 // export component
-export default Welcome;
+export default Welcome
