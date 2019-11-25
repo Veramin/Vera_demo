@@ -37,7 +37,7 @@ des = '66666'
 var arr: number[] = [1, 11, 111]
 
 
-
+ 
 // 方法二：
 // var arr1: Array<number> = [1, 11, 111, '1111']   Type 'string' is not assignable to type 'number'.
 var arr2: Array<number> = [1, 11, 111, 1111]
@@ -71,6 +71,31 @@ enum state {
 
 var e: state = state.done
 console.log(e) // 1000
+
+// #####################################################################################
+enum stateStr {
+    'success' = 200,
+    'error' = 400,
+    'doing' = 222,
+    'done' = 1000
+}
+
+var statusCode: stateStr = stateStr.done
+console.log(statusCode) // 1000
+// 注意观察转换之后的js文件, 得出结果：
+//  如果值全部为number类型，则其实是有原来的四对变成了8对，反之，则只有四对，如下所示:
+// enum stateStr {
+//     'success' = 200,
+//     'error' = 400,
+//     'doing' = 222,
+//     'done' = 1000,
+//     200 = 'success',
+//     400 = 'error',
+//     222 = 'doing',
+//     1000 = 'done'
+// }
+// 理解: 枚举类型就好比scss中的统一管理主题色（$THEME_COLOR: #FFF）的作用，将变量也统一管理起来，目的是防止代码出错，看似有点类似于vuex中的mutation-type中定义变量的作用。
+// #####################################################################################
 
 // 例子二
 
@@ -123,6 +148,18 @@ num = 'string'
 // 正确用法
 var ele: any = document.getElementById('box');
 ele.style.color = 'lightblue';
+// #####################################################################################
+// 任意类型错误用法两种不属于数据类型问题，故放在此处不合适。
+// Why?
+// Answer:  因为ts代码只是一种书写规范，并不会检查你的逻辑到底对不对。所以此处它根本就不会判断你得标签中是否存在一个id为box的标签，所以你需要允许它为空
+// How to deal with this error?
+// 方法一:  加英文叹号:ele!.style.color = 'red';
+// 方法二:  由于方法一的存在，试想一下，如果多出都需要加!号，满篇都是这样子的代码，工作量增加，代码可读性降低
+//          所以需要在tsconfig.json中将"strictNullChecks": true改为"strictNullChecks": false
+// 
+// 至于正确写法放在这里也是有问题，它也不属于数据类型问题
+// 并且这样子写不对，本来ts就是为了规范类型，给他any类型就失去了ts自身对于数据类型规范的作用。
+// #####################################################################################
 
 
 // ***************************************************************************
@@ -136,7 +173,7 @@ ele.style.color = 'lightblue';
 
 var num_: undefined;
 console.log(num_) // undefined
-// num_ = 21312; // Type '21312' is not assignable to type 'undefined'.
+// num_ = 21312; // Type '21312' is not assignable to type 'undefined'. 一般不会这么用，除非他一直都是undefined
 
 // 定义为赋值
 var num1: number | undefined;
@@ -152,6 +189,13 @@ tip = 312313;
 // void类型             // 一般用于不会返回任何数据的函数
 // 正确写法
 // 无返回值
+
+// #####################################################################################
+// 函数注释规范：后期可以通过工具转成标准的文档说明，见例子add函数
+/**
+ * 
+ */
+// #####################################################################################
 function noValue():void {
     console.log('这个函数无返回值');
 }
@@ -162,6 +206,20 @@ function value(): number {
 }
 value();
 console.log(value()) ///666
+
+// #####################################################################################
+/**
+ * 计算两个数相加之和
+ * @param a 第一个参数
+ * @param b 第二个参数
+ */ 
+function add(a: number, b: number): number {
+    return 11111;
+}
+add(1, 1);
+// How to create this annotation format?
+// 在function的上一行敲出/** */，按下enter即可自动生成。
+// #####################################################################################
 
 // 错误写法
 // 无返回值
@@ -180,10 +238,14 @@ console.log(value()) ///666
 
 // 这意味这声明never的变量只能被never类型所赋值
 var a: undefined;
-// a = 666;    // Type '666' is not assignable to type 'undefined'.
+// a = 666;    // Type '666' is not assignable to type 'undefined'.  一般不会这么用，除非他一直都是undefined
 a = undefined;
 
 
 var emp: null;
-// emp = 666;  // Type '666' is not assignable to type 'null'.
+// emp = 666;  // Type '666' is not assignable to type 'null'.  一般不会这么用，除非他一直都是undefined
 emp = null;
+
+// 小理解: 
+//          TypeScript中就算出现红色的下划线报错信息，但是依然不会阻碍它转换成js，而且会一字不差，完完整整的转换成js。
+//          Ts并不会去检测你的逻辑代码到底对不对，对与不对，只能转换成js，才知道。
