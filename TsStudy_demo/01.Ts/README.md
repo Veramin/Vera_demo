@@ -28,6 +28,7 @@
     TypeScript对于JavaScript而言，就好比Less对于Css。
 
     浏览器只能识别js, 所以我们需要先将ts编译成js，在在html文件中引入。
+    
 ~~当然如果想运行ts，还有别的方法，比如node环境。~~
 Analysis: 
     说法有误，ts代码都不会被识别，只有转换成js代码，才可以被识别。
